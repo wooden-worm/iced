@@ -575,7 +575,7 @@ pub fn run_command<Message: 'static + std::fmt::Debug + Send, E: Executor>(
     }
 }
 
-#![cfg(any(
+#[cfg(any(
     target_os = "windows",
     target_os = "macos",
     target_os = "android",
@@ -606,7 +606,7 @@ mod platform {
     }
 }
 
-#![cfg(not(any(
+#[cfg(not(any(
     target_os = "windows",
     target_os = "macos",
     target_os = "android",
