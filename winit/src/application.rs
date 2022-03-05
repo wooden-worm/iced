@@ -575,7 +575,16 @@ pub fn run_command<Message: 'static + std::fmt::Debug + Send, E: Executor>(
     }
 }
 
-#[cfg(not(target_arch = "wasm32"))]
+#![cfg(any(
+    target_os = "windows",
+    target_os = "macos",
+    target_os = "android",
+    target_os = "linux",
+    target_os = "dragonfly",
+    target_os = "freebsd",
+    target_os = "netbsd",
+    target_os = "openbsd"
+))]
 mod platform {
     pub fn run<T, F>(
         mut event_loop: winit::event_loop::EventLoop<T>,
@@ -597,7 +606,16 @@ mod platform {
     }
 }
 
-#[cfg(target_arch = "wasm32")]
+#![cfg(not(any(
+    target_os = "windows",
+    target_os = "macos",
+    target_os = "android",
+    target_os = "linux",
+    target_os = "dragonfly",
+    target_os = "freebsd",
+    target_os = "netbsd",
+    target_os = "openbsd"
+)))]
 mod platform {
     pub fn run<T, F>(
         event_loop: winit::event_loop::EventLoop<T>,
